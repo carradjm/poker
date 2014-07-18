@@ -2,6 +2,18 @@ require_relative 'deck.rb'
 
 class Hand
 
+  HAND_RANKING = [
+    :straight_flush,
+    :four_of_a_kind,
+    :full_house,
+    :flush,
+    :straight,
+    :three_of_a_kind,
+    :two_pair,
+    :one_pair,
+    :high_card
+  ]
+
   def self.deal_from(deck)
     Hand.new(deck.deal(5))
   end
@@ -19,6 +31,10 @@ class Hand
 
   def return_card_suits
     cards_suits = @cards.map { |card| card.suit }
+  end
+
+  def maybe_beat(other_hand)
+    HAND_RANKING.index(other_hand.hand_ranking) <=> HAND_RANKING.index(@hand_ranking)
   end
 
   def rank_hand
@@ -49,8 +65,7 @@ class Hand
   end
 
   def flush?
-    suit_to_match = @cards[0].suit
-    @cards.all? {|card| card.suit == suit_to_match}
+    @cards.all? {|card| card.suit == @cards[0].suit}
   end
 
   def straight?
@@ -76,7 +91,7 @@ class Hand
   end
 
   def one_pair?
-    return_card_values.uniq.count == 4
+    return_card_values.uniq.count ==
   end
 
   def high_card

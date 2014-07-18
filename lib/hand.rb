@@ -91,7 +91,7 @@ class Hand
   end
 
   def one_pair?
-    return_card_values.uniq.count ==
+    return_card_values.uniq.count == 4
   end
 
   def high_card

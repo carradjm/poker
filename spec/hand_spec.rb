@@ -206,24 +206,47 @@ describe Hand do
   end
 
   context "Determines winning hand" do
-  let(:hand1) { Hand.new([Card.new(:ten, :hearts),
-                            Card.new(:ten, :clubs),
-                             Card.new(:king, :diamonds),
-                             Card.new(:king, :spades),
-                             Card.new(:ace, :hearts)])
-                  }
-  let(:hand2) { Hand.new([Card.new(:ten, :hearts),
-                            Card.new(:jack, :clubs),
-                             Card.new(:queen, :hearts),
-                             Card.new(:king, :spades),
-                             Card.new(:ace, :hearts)])}
-      it "Should determine the winnner" do
+    let(:hand1) { Hand.new([Card.new(:ten, :hearts),
+                              Card.new(:ten, :clubs),
+                               Card.new(:king, :diamonds),
+                               Card.new(:king, :spades),
+                               Card.new(:ace, :hearts)])
+                    }
+    let(:hand2) { Hand.new([Card.new(:ten, :hearts),
+                              Card.new(:jack, :clubs),
+                               Card.new(:queen, :hearts),
+                               Card.new(:king, :spades),
+                               Card.new(:ace, :hearts)])}
+
+    it "Should determine the winner" do
+      hand1.rank_hand
+      hand2.rank_hand
+      expect((hand1).maybe_beat(hand2)).to eq(-1)
+    end
+  end
+
+  context "Handles ties" do
+    let(:hand1) { Hand.new([Card.new(:ten, :hearts),
+                              Card.new(:ten, :clubs),
+                               Card.new(:king, :diamonds),
+                               Card.new(:king, :spades),
+                               Card.new(:ace, :hearts)])
+                    }
+    let(:hand2) { Hand.new([Card.new(:ten, :hearts),
+                              Card.new(:ten, :clubs),
+                               Card.new(:king, :diamonds),
+                               Card.new(:king, :spades),
+                               Card.new(:ace, :hearts)])
+                    }
+
+      it "Should determine they tie" do
         hand1.rank_hand
         hand2.rank_hand
-        expect((hand1).maybe_beat(hand2)).to eq(-1)
+        expect((hand1).maybe_beat(hand2)).to eq(0)
       end
     end
-end
+  end
+
 
 
 # context "Swaps out card correctly?" do

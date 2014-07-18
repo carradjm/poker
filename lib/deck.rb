@@ -24,8 +24,11 @@ class Deck
   end
 
   def deal(n = 5)
-    @cards.pop(n)
+    n == 1 ?  [@cards.shift]: @cards.shift(n)
   end
 
+  def return_cards(cards)
+    @cards.concat(cards)
+  end
 
 end

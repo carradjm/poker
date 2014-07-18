@@ -8,8 +8,8 @@ describe Card do
   let(:card) { Card.new(:deuce, :hearts) }
 
     it "should have a suit and a value" do
-      expect(card.value).to eq("2")
-      expect(card.suit).to eq("hearts")
+      expect(card.value).to eq(2)
+      expect(card.suit).to eq("♥")
     end
 
 

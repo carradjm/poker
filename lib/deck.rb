@@ -11,7 +11,7 @@ class Deck
   def self.build_deck
     deck = []
     Card::SUIT_STRINGS.keys.each do |suit|
-      Card::VALUE_STRINGS.keys.each do |value|
+      Card::VALUES.keys.each do |value|
         deck << Card.new(value, suit)
       end
     end
@@ -29,6 +29,7 @@ class Deck
 
   def return_cards(cards)
     @cards.concat(cards)
+    deal(cards.length)
   end
 
 end
